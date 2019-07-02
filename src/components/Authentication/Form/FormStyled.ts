@@ -10,7 +10,7 @@ export const StyledWrapper = styled.div`
     min-width: 80%;
   }
 
-  @media (orientation: landscape) {
+  @media (orientation: landscape) and (max-height: 573px) {
     min-width: 100vw;
     overflow: scroll;
   }
@@ -57,7 +57,7 @@ export const StyledFlex = styled.div`
   flex-direction: column;
   padding: 30px 50px;
 
-  @media (orientation: landscape) {
+  @media (orientation: landscape) and (max-height: 573px) {
     padding: 70px 50px 30px 50px;
   }
 `;
