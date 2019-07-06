@@ -1,13 +1,11 @@
 import React from "react";
-import Search from "../../Chat/SearchBox/Search";
-import { StyledWrapper, StyledSearchBox } from "./StyledChat";
+import ChatBox from "../../Chat/ChatBox/ChatBox";
+import { StyledWrapper } from "./StyledChat";
 
 const Chat = () => {
   return (
     <StyledWrapper>
-      <StyledSearchBox>
-        <Search />
-      </StyledSearchBox>
+      <ChatBox />
     </StyledWrapper>
   );
 };
