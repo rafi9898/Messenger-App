@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Modal from "react-modal";
+import { connect } from "react-redux";
 
 const customStyles = {
   content: {
@@ -12,28 +13,20 @@ const customStyles = {
   }
 };
 
-const EmoticonsModal: React.SFC<IEmoticonsProps> = ({ isOpenModal }) => {
-  const [modalIsOpen, setModalStatus] = useState(false);
-
-  function closeModal() {
-    setModalStatus(false);
-  }
-
-  useEffect(() => {
-    isOpenModal && isOpenModal === true
-      ? setModalStatus(true)
-      : setModalStatus(false);
-  }, [isOpenModal]);
-
+const EmoticonsModal: React.SFC<IEmoticonsProps> = ({
+  setModalStatus,
+  modalStatus
+}) => {
   Modal.setAppElement("#root");
 
-  console.log(modalIsOpen);
+  const closeModal = () => {
+    setModalStatus(false);
+  };
 
   return (
     <div>
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
+        isOpen={modalStatus}
         style={customStyles}
         contentLabel="Example Modal"
       >
@@ -52,8 +45,16 @@ const EmoticonsModal: React.SFC<IEmoticonsProps> = ({ isOpenModal }) => {
   );
 };
 
+const mapStateToProps = (state: any) => {
+  return {
+    modalStatus: state.modal.modalStatus
+  };
+};
+
 interface IEmoticonsProps {
   isOpenModal?: boolean;
+  modalStatus?: any;
+  setModalStatus?: any;
 }
 
-export default EmoticonsModal;
+export default connect(mapStateToProps)(EmoticonsModal);

@@ -16,8 +16,10 @@ import MyMessageItem from "./MyMessageItem";
 import FriendMessageItem from "./FriendMessageItem";
 import EmoticonsModal from "../../Modals/EmoticonsModal";
 import axios from "axios";
+import { connect } from "react-redux";
+import { createModal } from "../../../store/actions/modalActions";
 
-const MessageBox: React.SFC<IStyledMessageProps> = () => {
+const MessageBox: React.SFC<IStyledMessageProps> = props => {
   const [messageList, setMessageList] = useState([
     {
       albumId: 1,
@@ -27,8 +29,6 @@ const MessageBox: React.SFC<IStyledMessageProps> = () => {
       thumbnailUrl: "https://via.placeholder.com/150/24f355"
     }
   ]);
-
-  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     axios.get("https://jsonplaceholder.typicode.com/photos").then(res => {
@@ -49,9 +49,9 @@ const MessageBox: React.SFC<IStyledMessageProps> = () => {
       <p>Brak wiadomości</p>
     );
 
-  function setStatusModal() {
-    setIsOpen(!isOpen);
-  }
+  const setStatusModal = () => {
+    props.createModal(true);
+  };
 
   return (
     <StyledWrapper>
@@ -73,7 +73,7 @@ const MessageBox: React.SFC<IStyledMessageProps> = () => {
             <InsertEmoticonIcon />
           </StyledConfigBtn>
 
-          <EmoticonsModal isOpenModal={isOpen} />
+          <EmoticonsModal setModalStatus={props.createModal} />
 
           <StyledSendBtn>Wyślij</StyledSendBtn>
         </StyledEnterMessageBox>
@@ -85,6 +85,16 @@ const MessageBox: React.SFC<IStyledMessageProps> = () => {
 interface IStyledMessageProps {
   mymessage?: any;
   isOpenModal?: boolean;
+  createModal?: any;
 }
 
-export default MessageBox;
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    createModal: (state: boolean) => dispatch(createModal(state))
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(MessageBox);
