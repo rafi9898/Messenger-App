@@ -7,15 +7,15 @@ import {
   StyledMessageBox
 } from "./StyledChatBox";
 
-const ChatBox = () => {
+const ChatBox = ({ rooms, roomId }: any) => {
   return (
     <StyledWrapper>
       <StyledSearchBox>
-        <Search />
+        <Search rooms={rooms} />
       </StyledSearchBox>
 
       <StyledMessageBox>
-        <MessageBox />
+        <MessageBox roomId={roomId} />
       </StyledMessageBox>
     </StyledWrapper>
   );

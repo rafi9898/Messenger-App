@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 export const StyledWrapper = styled.div`
   width: 100%;
@@ -26,9 +27,31 @@ export const StyledSearch = styled.input`
   border: none;
   padding: 15px 20px;
   margin-top: 40px;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   font-size: 1rem;
   box-shadow: 0px 0px 4px #333;
+`;
+
+export const StyledNewItemBtn = styled.button`
+  width: 100%;
+  padding: 12px 20px;
+  margin-bottom: 30px;
+  margin: 0 auto;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  box-shadow: 0px 0px 4px #333;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+  background-color: #7289da;
+  border-radius: 4px;
+  transition: all 0.3s;
+
+  &:hover {
+    background-color: #6175ba;
+    transition: all 0.3s;
+  }
 `;
 
 export const StyledPersonContainer = styled.div`
@@ -51,7 +74,7 @@ export const StyledActiveIcon = styled.div`
   position: relative;
   top: -15px;
   left: 10px;
-  background-color: #3a981e;
+  background-color: ${(props: IStatusProps) => props.currentColor};
   width: 9px;
   height: 9px;
   border-radius: 90px;
@@ -108,3 +131,16 @@ export const StyledLogoutButton = styled.button`
   bottom: 0;
   width: 25vw;
 `;
+
+export const StyledRoomLink = styled(Link)`
+  text-decoration: none;
+  color: none;
+
+  &:hover {
+    color: none;
+  }
+`;
+
+interface IStatusProps {
+  currentColor?: string;
+}

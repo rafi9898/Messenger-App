@@ -12,6 +12,7 @@ const App: React.FC = () => {
           <Route path="/" component={Login} exact />
           <Route path="/signup" component={SignUp} />
           <Route path="/dashboard" component={Chat} />
+          <Route path="/room/:id" component={Chat} />
         </Switch>
       </Router>
     </div>
