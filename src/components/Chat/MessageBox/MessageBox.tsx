@@ -18,8 +18,14 @@ import EmoticonsModal from "../../Modals/EmoticonsModal";
 import axios from "axios";
 import { connect } from "react-redux";
 import { createModal } from "../../../store/actions/modalActions";
+import { firestoreConnect } from "react-redux-firebase";
+import { compose } from "redux";
 
-const MessageBox: React.SFC<IStyledMessageProps> = props => {
+const MessageBox: React.SFC<IStyledMessageProps> = ({
+  createModal,
+  roomId,
+  room
+}) => {
   const [messageList, setMessageList] = useState([
     {
       albumId: 1,
@@ -50,34 +56,40 @@ const MessageBox: React.SFC<IStyledMessageProps> = props => {
     );
 
   const setStatusModal = () => {
-    props.createModal(true);
+    createModal(true);
   };
+
+  const currentMessage = room ? (
+    <StyledContainer>
+      <StyledHeaderMessage>
+        <StyledHeaderTitle>{room.roomName}</StyledHeaderTitle>
+      </StyledHeaderMessage>
+
+      <StyledMainContentBox>{currentMessageList}</StyledMainContentBox>
+
+      <StyledEnterMessageBox>
+        <StyledEnterMessage type="text" placeholder="Napisz wiadomość" />
+
+        <StyledConfigBtn>
+          <ImageAddIcon />
+        </StyledConfigBtn>
+
+        <StyledConfigBtn onClick={setStatusModal}>
+          <InsertEmoticonIcon />
+        </StyledConfigBtn>
+
+        <EmoticonsModal setModalStatus={createModal} />
+
+        <StyledSendBtn>Wyślij</StyledSendBtn>
+      </StyledEnterMessageBox>
+    </StyledContainer>
+  ) : (
+    <p>Taki pokój nie istnieje!</p>
+  );
 
   return (
     <StyledWrapper>
-      <StyledContainer>
-        <StyledHeaderMessage>
-          <StyledHeaderTitle>Anna Nowak</StyledHeaderTitle>
-        </StyledHeaderMessage>
-
-        <StyledMainContentBox>{currentMessageList}</StyledMainContentBox>
-
-        <StyledEnterMessageBox>
-          <StyledEnterMessage type="text" placeholder="Napisz wiadomość" />
-
-          <StyledConfigBtn>
-            <ImageAddIcon />
-          </StyledConfigBtn>
-
-          <StyledConfigBtn onClick={setStatusModal}>
-            <InsertEmoticonIcon />
-          </StyledConfigBtn>
-
-          <EmoticonsModal setModalStatus={props.createModal} />
-
-          <StyledSendBtn>Wyślij</StyledSendBtn>
-        </StyledEnterMessageBox>
-      </StyledContainer>
+      {currentMessage ? currentMessage : <p>Loading ...</p>}
     </StyledWrapper>
   );
 };
@@ -86,6 +98,8 @@ interface IStyledMessageProps {
   mymessage?: any;
   isOpenModal?: boolean;
   createModal?: any;
+  roomId?: any;
+  room?: any;
 }
 
 const mapDispatchToProps = (dispatch: any) => {
@@ -94,7 +108,19 @@ const mapDispatchToProps = (dispatch: any) => {
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
+const mapStateToProps = (state: any, ownProps: any) => {
+  const roomId = ownProps.roomId;
+  const rooms = state.firestore.data.rooms;
+  const room = rooms ? rooms[roomId] : null;
+  return {
+    room: room
+  };
+};
+
+export default compose<any>(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  firestoreConnect([{ collection: "rooms" }])
 )(MessageBox);

@@ -2,7 +2,11 @@ const initState = {
   modalStatus: false
 };
 
-const modalReducer = (state = initState, action: any) => {
+const AddRoomInitState = {
+  addRoomModalStatus: false
+};
+
+export const modalReducer = (state = initState, action: any) => {
   switch (action.type) {
     case "CREATE_MODAL":
       return {
@@ -12,4 +16,15 @@ const modalReducer = (state = initState, action: any) => {
   return state;
 };
 
-export default modalReducer;
+export const createAddRoomModalReducer = (
+  state = AddRoomInitState,
+  action: any
+) => {
+  switch (action.type) {
+    case "CREATE_ADD_NEW_ROOM_MODAL":
+      return {
+        addRoomModalStatus: action.addRoomModalStatus
+      };
+  }
+  return state;
+};

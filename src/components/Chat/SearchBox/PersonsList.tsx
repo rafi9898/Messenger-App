@@ -10,10 +10,10 @@ import {
 } from "./SearchStyled";
 import PersonAvatar from "../../../assets/girl-avatar.png";
 
-const PersonsList: React.SFC<IPersonProps> = ({ name, lastMessage }) => {
+const PersonsList: React.SFC<IPersonProps> = ({ name, lastMessage, color }) => {
   return (
     <StyledPersonContainer>
-      <StyledActiveIcon />
+      <StyledActiveIcon currentColor={color} />
 
       <StyledAvatarBox>
         <StyledSearchAvatar src={PersonAvatar} alt="person avatar" />
@@ -30,6 +30,7 @@ const PersonsList: React.SFC<IPersonProps> = ({ name, lastMessage }) => {
 interface IPersonProps {
   name?: string;
   lastMessage?: string;
+  color?: string;
 }
 
 export default PersonsList;
