@@ -11,7 +11,33 @@ import {
   StyledAnotherLink
 } from "./FormStyled";
 
-class SignUpForm extends Component {
+class SignUpForm extends Component<{}, IStateSignUp> {
+  state = {
+    email: "",
+    firstName: "",
+    lastName: "",
+    password: "",
+    avatar: null
+  };
+
+  setCurrentData = (e: any) => {
+    this.setState({
+      [e.currentTarget.name]: e.currentTarget.value
+    } as Pick<IStateSignUp, keyof IStateSignUp>);
+  };
+
+  createNewUser = (e: any) => {
+    e.preventDefault();
+    if (
+      this.state.email &&
+      this.state.firstName &&
+      this.state.lastName &&
+      this.state.password
+    ) {
+      console.log(this.state);
+    }
+  };
+
   render() {
     return (
       <StyledWrapper>
@@ -20,15 +46,35 @@ class SignUpForm extends Component {
             <StyledFormTitle>Register</StyledFormTitle>
             <StyledFormSubTitle>Register a new account!</StyledFormSubTitle>
             <StyledLabel>Email</StyledLabel>
-            <StyledInput type="email" required />
+            <StyledInput
+              onChange={this.setCurrentData}
+              name="email"
+              type="email"
+              required
+            />
             <StyledLabel>First name</StyledLabel>
-            <StyledInput type="text" required />
+            <StyledInput
+              onChange={this.setCurrentData}
+              name="firstName"
+              type="text"
+              required
+            />
             <StyledLabel>Last name</StyledLabel>
-            <StyledInput type="text" required />
+            <StyledInput
+              onChange={this.setCurrentData}
+              name="lastName"
+              type="text"
+              required
+            />
             <StyledLabel>Password</StyledLabel>
-            <StyledInput type="password" required />
+            <StyledInput
+              onChange={this.setCurrentData}
+              name="password"
+              type="password"
+              required
+            />
             Choose profile image
-            <StyledButton>Sign Up</StyledButton>
+            <StyledButton onClick={this.createNewUser}>Sign Up</StyledButton>
             <StyledAnotherLink to="/login">
               Do you have an account? Sign In!
             </StyledAnotherLink>
@@ -37,6 +83,14 @@ class SignUpForm extends Component {
       </StyledWrapper>
     );
   }
+}
+
+interface IStateSignUp {
+  email: string;
+  firstName: string;
+  lastName: string;
+  password: string;
+  avatar: any;
 }
 
 export default SignUpForm;
