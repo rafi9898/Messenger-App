@@ -10,6 +10,7 @@ import {
   StyledButton,
   StyledAnotherLink
 } from "./FormStyled";
+import ImageUploader from "react-images-upload";
 
 class SignUpForm extends Component<{}, IStateSignUp> {
   state = {
@@ -17,13 +18,19 @@ class SignUpForm extends Component<{}, IStateSignUp> {
     firstName: "",
     lastName: "",
     password: "",
-    avatar: null
+    profileImage: []
   };
 
   setCurrentData = (e: any) => {
     this.setState({
       [e.currentTarget.name]: e.currentTarget.value
     } as Pick<IStateSignUp, keyof IStateSignUp>);
+  };
+
+  setProfileImage = (image: any) => {
+    this.setState({
+      profileImage: [image[image.length - 1]]
+    });
   };
 
   createNewUser = (e: any) => {
@@ -39,6 +46,7 @@ class SignUpForm extends Component<{}, IStateSignUp> {
   };
 
   render() {
+    console.log(this.state.profileImage);
     return (
       <StyledWrapper>
         <StyledForm>
@@ -73,7 +81,14 @@ class SignUpForm extends Component<{}, IStateSignUp> {
               type="password"
               required
             />
-            Choose profile image
+            <ImageUploader
+              singleImage={true}
+              withIcon={true}
+              buttonText="Choose images"
+              onChange={this.setProfileImage}
+              imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+              maxFileSize={5242880}
+            />
             <StyledButton onClick={this.createNewUser}>Sign Up</StyledButton>
             <StyledAnotherLink to="/login">
               Do you have an account? Sign In!
@@ -90,7 +105,7 @@ interface IStateSignUp {
   firstName: string;
   lastName: string;
   password: string;
-  avatar: any;
+  profileImage?: any;
 }
 
 export default SignUpForm;

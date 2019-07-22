@@ -88,6 +88,16 @@ export const StyledInput = styled.input`
   font-size: 1rem;
 `;
 
+export const StyledAuthError = styled.p`
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: crimson;
+  letter-spacing: 0.4px;
+`;
+
 export const StyledButton = styled.button`
   width: 100%;
   margin-top: 25px;
