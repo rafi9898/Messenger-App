@@ -11,8 +11,13 @@ import PersonsList from "./PersonsList";
 import { createAddNewRoomModal } from "../../../store/actions/modalActions";
 import { connect } from "react-redux";
 import AddNewRoomModal from "../../Modals/AddNewRoom/AddNewRoomModal";
+import { signOut } from "../../../store/actions/authActions";
 
-const Search: React.SFC<ISearchProps> = ({ createAddNewRoomModal, rooms }) => {
+const Search: React.SFC<ISearchProps> = ({
+  createAddNewRoomModal,
+  rooms,
+  signOut
+}) => {
   const showRoomList =
     rooms &&
     rooms.map((room: any) => {
@@ -38,7 +43,7 @@ const Search: React.SFC<ISearchProps> = ({ createAddNewRoomModal, rooms }) => {
         {showRoomList}
       </StyledContainer>
       <AddNewRoomModal setModalStatus={createAddNewRoomModal} />
-      <StyledLogoutButton>Wyloguj</StyledLogoutButton>
+      <StyledLogoutButton onClick={signOut}>Wyloguj</StyledLogoutButton>
     </StyledWrapper>
   );
 };
@@ -46,13 +51,16 @@ const Search: React.SFC<ISearchProps> = ({ createAddNewRoomModal, rooms }) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     createAddNewRoomModal: (state: boolean) =>
-      dispatch(createAddNewRoomModal(state))
+      dispatch(createAddNewRoomModal(state)),
+
+    signOut: () => dispatch(signOut())
   };
 };
 
 interface ISearchProps {
   createAddNewRoomModal: any;
   rooms?: any;
+  signOut?: any;
 }
 
 export default connect(
