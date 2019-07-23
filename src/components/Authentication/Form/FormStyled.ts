@@ -98,6 +98,16 @@ export const StyledAuthError = styled.p`
   letter-spacing: 0.4px;
 `;
 
+export const StyledErrorMessage = styled.p`
+  font-size: 1rem;
+  text-align: center;
+  color: crimson;
+  letter-spacing: 0.4px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+`;
+
 export const StyledButton = styled.button`
   width: 100%;
   margin-top: 25px;
