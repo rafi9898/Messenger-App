@@ -8,11 +8,14 @@ import {
   StyledLabel,
   StyledInput,
   StyledButton,
+  StyledErrorMessage,
   StyledAnotherLink
 } from "./FormStyled";
 import ImageUploader from "react-images-upload";
+import { signUp } from "../../../store/actions/authActions";
+import { connect } from "react-redux";
 
-class SignUpForm extends Component<{}, IStateSignUp> {
+class SignUpForm extends Component<any, IStateSignUp> {
   state = {
     email: "",
     firstName: "",
@@ -41,12 +44,11 @@ class SignUpForm extends Component<{}, IStateSignUp> {
       this.state.lastName &&
       this.state.password
     ) {
-      console.log(this.state);
+      this.props.signUp(this.state);
     }
   };
 
   render() {
-    console.log(this.state.profileImage);
     return (
       <StyledWrapper>
         <StyledForm>
@@ -89,6 +91,10 @@ class SignUpForm extends Component<{}, IStateSignUp> {
               imgExtension={[".jpg", ".gif", ".png", ".gif"]}
               maxFileSize={5242880}
             />
+            {this.props.authError ? (
+              <StyledErrorMessage>{this.props.authError}</StyledErrorMessage>
+            ) : null}
+
             <StyledButton onClick={this.createNewUser}>Sign Up</StyledButton>
             <StyledAnotherLink to="/login">
               Do you have an account? Sign In!
@@ -100,12 +106,29 @@ class SignUpForm extends Component<{}, IStateSignUp> {
   }
 }
 
+const mapStateToProps = (state: any) => {
+  return {
+    authError: state.auth.authError
+  };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    signUp: (newUser: any) => dispatch(signUp(newUser))
+  };
+};
+
 interface IStateSignUp {
   email: string;
   firstName: string;
   lastName: string;
   password: string;
   profileImage?: any;
+  signUp?: any;
+  authError?: any;
 }
 
-export default SignUpForm;
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SignUpForm);

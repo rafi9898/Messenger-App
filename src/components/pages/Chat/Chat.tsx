@@ -4,8 +4,11 @@ import { StyledWrapper } from "./StyledChat";
 import { connect } from "react-redux";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import { Redirect } from "react-router-dom";
 
-const Chat = ({ rooms, match }: any) => {
+const Chat = ({ rooms, match, auth }: any) => {
+  if (!auth.uid) return <Redirect to="/" />;
+
   return (
     <StyledWrapper>
       <ChatBox rooms={rooms} roomId={match.params.id} />
@@ -15,7 +18,8 @@ const Chat = ({ rooms, match }: any) => {
 
 const mapStateToProps = (state: any) => {
   return {
-    rooms: state.firestore.ordered.rooms
+    rooms: state.firestore.ordered.rooms,
+    auth: state.firebase.auth
   };
 };
 
