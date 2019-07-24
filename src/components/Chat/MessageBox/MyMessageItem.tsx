@@ -5,9 +5,10 @@ import {
   StyledAvatarBox,
   StyledMessageAvatar,
   StyledContentBox,
-  StyledMessage
+  StyledMessage,
+  StyledNameFirend
 } from "./StyledMessageBox";
-import MessageAvatar from "../../../assets/girl-avatar.png";
+import MessageAvatar from "../../../assets/hashtag-icon.png";
 
 const MyMessageItem: React.SFC<IStyledMessageProps> = () => {
   return (
@@ -18,6 +19,7 @@ const MyMessageItem: React.SFC<IStyledMessageProps> = () => {
         </StyledAvatarBox>
 
         <StyledContentBox>
+          <StyledNameFirend>Rafał Podraza (3 Lipca 2019)</StyledNameFirend>
           <StyledMessage>Hej co tam?</StyledMessage>
         </StyledContentBox>
       </StyledMessageBox>

@@ -30,6 +30,12 @@ export const StyledHeaderTitle = styled.h2`
   letter-spacing: 0.7px;
 `;
 
+export const StyledNameFirend = styled.span`
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: "#333";
+`;
+
 export const StyledMessageContainer = styled.div`
   height: auto;
   background: #eff0f4;
@@ -46,6 +52,13 @@ export const StyledMessageBox = styled.div`
   display: flex;
   justify-content: ${(props: IStyledMessageProps) =>
     props.mymessage ? "flex-end" : "flex-start"};
+`;
+
+export const Styled404Room = styled.h2`
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-align: center;
 `;
 
 export const StyledAvatarBox = styled.div`

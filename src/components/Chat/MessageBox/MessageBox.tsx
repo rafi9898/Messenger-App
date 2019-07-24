@@ -10,6 +10,7 @@ import {
   StyledSendBtn,
   ImageAddIcon,
   InsertEmoticonIcon,
+  Styled404Room,
   StyledMainContentBox
 } from "./StyledMessageBox";
 import MyMessageItem from "./MyMessageItem";
@@ -20,6 +21,8 @@ import { connect } from "react-redux";
 import { createModal } from "../../../store/actions/modalActions";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
+import LoadSpinnerImage from "../../../assets/load-spinner.svg";
+import { StyledLoadSpinner } from "../SearchBox/SearchStyled";
 
 const MessageBox: React.SFC<IStyledMessageProps> = ({
   createModal,
@@ -43,17 +46,15 @@ const MessageBox: React.SFC<IStyledMessageProps> = ({
   }, []);
 
   const currentMessageList =
-    messageList && messageList ? (
-      messageList.map(message => {
-        return message.id === 5 ? (
-          <FriendMessageItem key={message.id} />
-        ) : (
-          <MyMessageItem key={message.id} />
-        );
-      })
-    ) : (
-      <p>Brak wiadomości</p>
-    );
+    messageList && messageList
+      ? messageList.map(message => {
+          return message.id === 5 ? (
+            <FriendMessageItem key={message.id} />
+          ) : (
+            <MyMessageItem key={message.id} />
+          );
+        })
+      : null;
 
   const setStatusModal = () => {
     createModal(true);
@@ -65,7 +66,13 @@ const MessageBox: React.SFC<IStyledMessageProps> = ({
         <StyledHeaderTitle>{room.roomName}</StyledHeaderTitle>
       </StyledHeaderMessage>
 
-      <StyledMainContentBox>{currentMessageList}</StyledMainContentBox>
+      <StyledMainContentBox>
+        {currentMessageList ? (
+          currentMessageList
+        ) : (
+          <StyledLoadSpinner src={LoadSpinnerImage} alt="spinner image" />
+        )}
+      </StyledMainContentBox>
 
       <StyledEnterMessageBox>
         <StyledEnterMessage type="text" placeholder="Napisz wiadomość" />
@@ -84,7 +91,9 @@ const MessageBox: React.SFC<IStyledMessageProps> = ({
       </StyledEnterMessageBox>
     </StyledContainer>
   ) : (
-    <p>Taki pokój nie istnieje!</p>
+    <StyledContainer>
+      <Styled404Room>Aby zobaczyć wiadomość wybierz pokój!</Styled404Room>
+    </StyledContainer>
   );
 
   return (

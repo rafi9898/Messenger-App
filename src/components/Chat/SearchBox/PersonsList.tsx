@@ -8,7 +8,7 @@ import {
   StyledPersonName,
   StyledLastMessage
 } from "./SearchStyled";
-import PersonAvatar from "../../../assets/girl-avatar.png";
+import PersonAvatar from "../../../assets/hashtag-icon.png";
 
 const PersonsList: React.SFC<IPersonProps> = ({ name, lastMessage, color }) => {
   return (
