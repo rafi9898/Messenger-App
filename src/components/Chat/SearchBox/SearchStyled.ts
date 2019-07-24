@@ -54,6 +54,12 @@ export const StyledNewItemBtn = styled.button`
   }
 `;
 
+export const StyledLoadSpinner = styled.img`
+  width: 60px;
+  height: 60px;
+  margin: 0 auto;
+`;
+
 export const StyledPersonContainer = styled.div`
   display: flex;
   justify-content: flex-start;

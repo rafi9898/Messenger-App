@@ -34,7 +34,7 @@ const AddNewRoomModal: React.SFC<IAddRoomProps> = ({
   Modal.setAppElement("#root");
 
   const [roomName, setRoomName] = useState("");
-  const [roomColor, setRoomColor] = useState("#000000");
+  const [roomColor, setRoomColor] = useState("#61bd1a");
 
   const closeModal = () => {
     setModalStatus(false);
@@ -80,6 +80,7 @@ const AddNewRoomModal: React.SFC<IAddRoomProps> = ({
           type="color"
           onChange={setDataRoom}
           name="RoomColor"
+          value={roomColor}
           required
         />
 

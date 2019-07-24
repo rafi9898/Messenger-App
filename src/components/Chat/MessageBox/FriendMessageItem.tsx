@@ -3,7 +3,8 @@ import {
   StyledMessageContainer,
   StyledMessageBox,
   StyledContentBox,
-  StyledMessage
+  StyledMessage,
+  StyledNameFirend
 } from "./StyledMessageBox";
 
 const FriendMessageItem: React.SFC<IStyledMessageProps> = () => {

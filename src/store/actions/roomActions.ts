@@ -2,12 +2,15 @@ export const createRoom = (room: any) => {
   return (dispatch: any, getState: any, { getFirebase, getFirestore }: any) => {
     //make async call to datanase
     const firestore = getFirestore();
+    const profile = getState().firebase.profile;
+    const authorId = getState().firebase.auth.uid;
+    console.log(getState().firebase);
     firestore
       .collection("rooms")
       .add({
         ...room,
-        createdBy: "Rafi9898",
-        authorId: "12345",
+        createdBy: profile.firstName + " " + profile.lastName,
+        authorId: authorId,
         createdAt: new Date()
       })
       .then(() => {
