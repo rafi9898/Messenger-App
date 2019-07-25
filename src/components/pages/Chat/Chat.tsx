@@ -9,8 +9,6 @@ import { Redirect } from "react-router-dom";
 const Chat = ({ rooms, match, auth }: any) => {
   if (!auth.uid) return <Redirect to="/" />;
 
-  console.log(rooms);
-
   return (
     <StyledWrapper>
       <ChatBox rooms={rooms} roomId={match.params.id} />
