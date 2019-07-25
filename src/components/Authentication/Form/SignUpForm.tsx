@@ -96,7 +96,7 @@ class SignUpForm extends Component<any, IStateSignUp> {
             ) : null}
 
             <StyledButton onClick={this.createNewUser}>Sign Up</StyledButton>
-            <StyledAnotherLink to="/login">
+            <StyledAnotherLink to="/">
               Do you have an account? Sign In!
             </StyledAnotherLink>
           </StyledFlex>
