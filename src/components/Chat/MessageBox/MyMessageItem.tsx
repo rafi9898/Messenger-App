@@ -9,7 +9,7 @@ import {
   StyledNameFirend,
   Styled404Room
 } from "./StyledMessageBox";
-import MessageAvatar from "../../../assets/hashtag-icon.png";
+import MessageAvatar from "../../../assets/user-avatar.png";
 import { StyledLoadSpinner } from "../SearchBox/SearchStyled";
 import LoadSpinnerImage from "../../../assets/load-spinner.svg";
 import moment from "moment";
@@ -21,11 +21,14 @@ const MyMessageItem: React.SFC<IStyledMessageProps> = ({ message, userId }) => {
         return (
           <StyledMessageBox key={key}>
             <StyledAvatarBox>
-              <StyledMessageAvatar src={MessageAvatar} alt="message avatar" />
+              <StyledMessageAvatar
+                src={item.picture ? item.picture : MessageAvatar}
+                alt="message avatar"
+              />
             </StyledAvatarBox>
 
-            <StyledContentBox mymessage={item.authorId === userId}>
-              <StyledNameFirend mymessage={item.authorId === userId}>
+            <StyledContentBox mymessage={item.authorId === userId ? 1 : 0}>
+              <StyledNameFirend mymessage={item.authorId === userId ? 1 : 0}>
                 {item.createdBy} (
                 {item.createdAt
                   ? moment(item.createdAt.toDate()).calendar()
@@ -33,7 +36,7 @@ const MyMessageItem: React.SFC<IStyledMessageProps> = ({ message, userId }) => {
                 )
               </StyledNameFirend>
               <StyledMessage
-                mymessage={item.authorId === userId}
+                mymessage={item.authorId === userId ? 1 : 0}
                 text={String(item.message)}
               />
             </StyledContentBox>

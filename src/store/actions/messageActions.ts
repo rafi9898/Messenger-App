@@ -12,7 +12,8 @@ export const createMessage = (message: any) => {
         ...message,
         createdBy: profile.firstName + " " + profile.lastName,
         authorId: authorId,
-        createdAt: new Date()
+        createdAt: new Date(),
+        picture: profile.picture
       })
       .then(() => {
         dispatch({ type: "CREATE_MESSAGE", message });

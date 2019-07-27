@@ -148,13 +148,15 @@ export default compose<any>(
     mapStateToProps,
     mapDispatchToProps
   ),
-  firestoreConnect((props: any) => [
-    { collection: "rooms" },
-    {
-      collection: "messages",
-      doc: props.roomId ? props.roomId : "Brak Id",
-      subcollections: [{ collection: "messageList" }],
-      orderBy: "createdAt"
-    }
-  ])
+  firestoreConnect((props: any) => {
+    return [
+      { collection: "rooms" },
+      {
+        collection: "messages",
+        doc: props.roomId && props.roomId ? props.roomId : "Brak Id",
+        subcollections: [{ collection: "messageList", orderBy: "createdAt" }],
+        storeAs: `messages`
+      }
+    ];
+  })
 )(MessageBox);
