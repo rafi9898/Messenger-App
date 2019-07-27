@@ -11,7 +11,7 @@ const Chat = ({ rooms, match, auth }: any) => {
 
   return (
     <StyledWrapper>
-      <ChatBox rooms={rooms} roomId={match.params.id} />
+      <ChatBox userId={auth.uid} rooms={rooms} roomId={match.params.id} />
     </StyledWrapper>
   );
 };

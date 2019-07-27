@@ -7,7 +7,7 @@ import {
   StyledMessageBox
 } from "./StyledChatBox";
 
-const ChatBox = ({ rooms, roomId }: any) => {
+const ChatBox = ({ rooms, roomId, userId }: any) => {
   return (
     <StyledWrapper>
       <StyledSearchBox>
@@ -15,7 +15,7 @@ const ChatBox = ({ rooms, roomId }: any) => {
       </StyledSearchBox>
 
       <StyledMessageBox>
-        <MessageBox roomId={roomId} />
+        <MessageBox userId={userId} roomId={roomId} />
       </StyledMessageBox>
     </StyledWrapper>
   );

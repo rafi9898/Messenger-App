@@ -1,5 +1,5 @@
 const initState = {
-  messages: [{ message: "Hej", roomId: "1234" }]
+  messages: []
 };
 
 const messageReducer = (state = initState, action: any) => {

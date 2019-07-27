@@ -4,7 +4,6 @@ export const createMessage = (message: any) => {
     const firestore = getFirestore();
     const profile = getState().firebase.profile;
     const authorId = getState().firebase.auth.uid;
-    console.log(message);
     firestore
       .collection("messages")
       .doc(message.roomId)
