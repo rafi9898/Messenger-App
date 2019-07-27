@@ -60,6 +60,18 @@ class MessageBox extends Component<IStyledMessageProps> {
       }
     };
 
+    const sendMessageWithEnter = (e: any) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        if (this.state.message.length > 0) {
+          createMessage(this.state);
+          this.setState({
+            message: ""
+          });
+        }
+      }
+    };
+
     const currentMessage =
       room && room ? (
         <StyledContainer>
@@ -74,9 +86,9 @@ class MessageBox extends Component<IStyledMessageProps> {
               <StyledLoadSpinner src={LoadSpinnerImage} alt="spinner image" />
             )}
           </StyledMainContentBox>
-
           <StyledEnterMessageBox>
             <StyledEnterMessage
+              onKeyDown={sendMessageWithEnter}
               onChange={setMessage}
               value={this.state.message}
               type="text"
