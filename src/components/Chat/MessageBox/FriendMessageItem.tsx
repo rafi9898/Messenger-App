@@ -11,7 +11,7 @@ const FriendMessageItem: React.SFC<IStyledMessageProps> = () => {
     <StyledMessageContainer>
       <StyledMessageBox mymessage>
         <StyledContentBox mymessage>
-          <StyledMessage mymessage>Hej co tam?</StyledMessage>
+          <StyledMessage text="Hej co tam?" mymessage />
         </StyledContentBox>
       </StyledMessageBox>
     </StyledMessageContainer>

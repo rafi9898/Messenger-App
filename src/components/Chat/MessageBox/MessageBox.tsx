@@ -14,7 +14,6 @@ import {
   StyledMainContentBox
 } from "./StyledMessageBox";
 import MyMessageItem from "./MyMessageItem";
-import FriendMessageItem from "./FriendMessageItem";
 import EmoticonsModal from "../../Modals/EmoticonsModal";
 import { connect } from "react-redux";
 import { createModal } from "../../../store/actions/modalActions";
@@ -31,7 +30,14 @@ class MessageBox extends Component<IStyledMessageProps> {
   };
 
   render() {
-    const { createModal, roomId, room, createMessage } = this.props;
+    const {
+      createModal,
+      roomId,
+      room,
+      createMessage,
+      message,
+      userId
+    } = this.props;
 
     const setStatusModal = () => {
       createModal(true);
@@ -54,47 +60,47 @@ class MessageBox extends Component<IStyledMessageProps> {
       }
     };
 
-    const currentMessage = room ? (
-      <StyledContainer>
-        <StyledHeaderMessage>
-          <StyledHeaderTitle>{room.roomName}</StyledHeaderTitle>
-        </StyledHeaderMessage>
+    const currentMessage =
+      room && room ? (
+        <StyledContainer>
+          <StyledHeaderMessage>
+            <StyledHeaderTitle>{room.roomName}</StyledHeaderTitle>
+          </StyledHeaderMessage>
 
-        <StyledMainContentBox>
-          {/* {currentMessageList ? (
-          <FriendMessageItem />
-          <MyMessageItem  />
-        ) : (
-          <StyledLoadSpinner src={LoadSpinnerImage} alt="spinner image" />
-        )} */}
-        </StyledMainContentBox>
+          <StyledMainContentBox>
+            {message && message ? (
+              <MyMessageItem userId={userId} message={message} />
+            ) : (
+              <StyledLoadSpinner src={LoadSpinnerImage} alt="spinner image" />
+            )}
+          </StyledMainContentBox>
 
-        <StyledEnterMessageBox>
-          <StyledEnterMessage
-            onChange={setMessage}
-            value={this.state.message}
-            type="text"
-            placeholder="Napisz wiadomość"
-          />
+          <StyledEnterMessageBox>
+            <StyledEnterMessage
+              onChange={setMessage}
+              value={this.state.message}
+              type="text"
+              placeholder="Napisz wiadomość"
+            />
 
-          <StyledConfigBtn>
-            <ImageAddIcon />
-          </StyledConfigBtn>
+            <StyledConfigBtn>
+              <ImageAddIcon />
+            </StyledConfigBtn>
 
-          <StyledConfigBtn onClick={setStatusModal}>
-            <InsertEmoticonIcon />
-          </StyledConfigBtn>
+            <StyledConfigBtn onClick={setStatusModal}>
+              <InsertEmoticonIcon />
+            </StyledConfigBtn>
 
-          <EmoticonsModal setModalStatus={createModal} />
+            <EmoticonsModal setModalStatus={createModal} />
 
-          <StyledSendBtn onClick={addNewMessage}>Wyślij</StyledSendBtn>
-        </StyledEnterMessageBox>
-      </StyledContainer>
-    ) : (
-      <StyledContainer>
-        <Styled404Room>Aby zobaczyć wiadomość wybierz pokój!</Styled404Room>
-      </StyledContainer>
-    );
+            <StyledSendBtn onClick={addNewMessage}>Wyślij</StyledSendBtn>
+          </StyledEnterMessageBox>
+        </StyledContainer>
+      ) : (
+        <StyledContainer>
+          <Styled404Room>Aby zobaczyć wiadomość wybierz pokój!</Styled404Room>
+        </StyledContainer>
+      );
 
     return (
       <StyledWrapper>
@@ -115,6 +121,8 @@ interface IStyledMessageProps {
   roomId?: any;
   room?: any;
   createMessage?: any;
+  message?: any;
+  userId?: any;
 }
 
 const mapDispatchToProps = (dispatch: any) => {
@@ -128,8 +136,10 @@ const mapStateToProps = (state: any, ownProps: any) => {
   const roomId = ownProps.roomId;
   const rooms = state.firestore.data.rooms;
   const room = rooms ? rooms[roomId] : null;
+  const message = state.firestore.ordered.messages;
   return {
-    room: room
+    room: room,
+    message: message
   };
 };
 
@@ -138,5 +148,13 @@ export default compose<any>(
     mapStateToProps,
     mapDispatchToProps
   ),
-  firestoreConnect([{ collection: "rooms" }])
+  firestoreConnect((props: any) => [
+    { collection: "rooms" },
+    {
+      collection: "messages",
+      doc: props.roomId ? props.roomId : "Brak Id",
+      subcollections: [{ collection: "messageList" }],
+      orderBy: "createdAt"
+    }
+  ])
 )(MessageBox);

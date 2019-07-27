@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { ImageAdd } from "styled-icons/boxicons-regular/ImageAdd";
 import { InsertEmoticon } from "styled-icons/material/InsertEmoticon";
+import Emoji from "react-emoji-render";
 
 export const StyledWrapper = styled.div`
   width: 100%;
@@ -33,7 +34,8 @@ export const StyledHeaderTitle = styled.h2`
 export const StyledNameFirend = styled.span`
   font-size: 0.9rem;
   font-weight: bold;
-  color: "#333";
+  color: ${(props: IStyledMessageProps) =>
+    props.mymessage ? "#ECECEC" : "#212121"};
 `;
 
 export const StyledMessageContainer = styled.div`
@@ -50,6 +52,7 @@ export const StyledMainContentBox = styled.div`
 export const StyledMessageBox = styled.div`
   width: 100%;
   display: flex;
+  margin-top: 20px;
   justify-content: ${(props: IStyledMessageProps) =>
     props.mymessage ? "flex-end" : "flex-start"};
 `;
@@ -81,9 +84,10 @@ export const StyledContentBox = styled.div`
   box-shadow: 10px 11px 5px -14px rgba(0, 0, 0, 0.75);
 `;
 
-export const StyledMessage = styled.p`
+export const StyledMessage = styled(Emoji)`
   font-size: 1rem;
   font-weight: 500;
+  display: block;
   color: ${(props: IStyledMessageProps) =>
     props.mymessage ? "#ECECEC" : "#212121"};
 `;
