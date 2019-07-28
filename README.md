@@ -4,7 +4,9 @@
 
 <img src="https://rafal-podraza.pl/img/projekty/messengerapp-1.png" alt="messenger photo" />
 <img src="https://rafal-podraza.pl/img/projekty/messengerapp-2.png" alt="messenger photo" />
-<img src="https://rafal-podraza.pl/img/projekty/messengerapp-3.png" alt="messenger photo" />
+<img src="https://rafal-podraza.pl/img/projekty/messengerapp-3.png" alt="messenger photo" /> <br />
+
+<h3><a href="https://messenger-app-rafi9898.web.app" target="_blank">DEMO PROJEKTU</a></h3>
 
 ## Available Scripts
 
