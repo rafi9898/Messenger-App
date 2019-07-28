@@ -1,4 +1,7 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2>Messenger App</h2>
+<hr />
+<p>Aplikacja Messenger App to połączenie słynnych dwóch komunikatorów jakimi są Discord oraz Messenger. Aplikacja umożliwia tworzenie pokojów przez użytkowników oraz komunikację podobną to tej, która występuje w messengerze. Aplikacja została napisana w bibliotece React z użyciem Redux + TypeScript + StyledComponents + Firebase.</p><br />
+
 
 ## Available Scripts
 
