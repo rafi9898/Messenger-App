@@ -24,7 +24,7 @@ class SignUpForm extends Component<any, IStateSignUp> {
     profileImage: []
   };
 
-  setCurrentData = (e: any) => {
+  setCurrentData = (e: React.FormEvent<HTMLInputElement>) => {
     this.setState({
       [e.currentTarget.name]: e.currentTarget.value
     } as Pick<IStateSignUp, keyof IStateSignUp>);
@@ -36,7 +36,7 @@ class SignUpForm extends Component<any, IStateSignUp> {
     });
   };
 
-  createNewUser = (e: any) => {
+  createNewUser = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     if (
       this.state.email &&
@@ -88,7 +88,7 @@ class SignUpForm extends Component<any, IStateSignUp> {
               withIcon={true}
               buttonText="Choose images"
               onChange={this.setProfileImage}
-              imgExtension={[".jpg", ".gif", ".png", ".gif"]}
+              imgExtension={[".jpg", ".jpeg", ".gif", ".png", ".gif"]}
               maxFileSize={5242880}
             />
             {this.props.authError ? (
@@ -114,7 +114,7 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    signUp: (newUser: any) => dispatch(signUp(newUser))
+    signUp: (newUser: object) => dispatch(signUp(newUser))
   };
 };
 
@@ -125,7 +125,7 @@ interface IStateSignUp {
   password: string;
   profileImage?: any;
   signUp?: any;
-  authError?: any;
+  authError?: string;
 }
 
 export default connect(

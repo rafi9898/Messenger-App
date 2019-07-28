@@ -55,7 +55,7 @@ export const StyledColorInput = styled.input`
 `;
 
 export const StyledAddRoomBtn = styled.button`
-  width: 40%;
+  width: 80%;
   padding: 17px 7px;
   background-color: #7289da;
   text-transform: uppercase;

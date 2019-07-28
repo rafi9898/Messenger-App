@@ -136,6 +136,10 @@ export const StyledLogoutButton = styled.button`
   position: absolute;
   bottom: 0;
   width: 25vw;
+
+  @media (max-width: 1200px) {
+    width: 100vw;
+  }
 `;
 
 export const StyledRoomLink = styled(Link)`

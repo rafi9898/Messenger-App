@@ -2,6 +2,7 @@ import authReducer from "./authReducer";
 import roomReducer from "./roomReducer";
 import { modalReducer } from "./modalReducer";
 import { createAddRoomModalReducer } from "./modalReducer";
+import { createShowSearchBox } from "./modalReducer";
 import { combineReducers } from "redux";
 import { firestoreReducer } from "redux-firestore";
 import { firebaseReducer } from "react-redux-firebase";
@@ -13,6 +14,7 @@ const rootReducer = combineReducers({
   modal: modalReducer,
   message: messageReducer,
   createAddRoomModal: createAddRoomModalReducer,
+  createShowSearchBox: createShowSearchBox,
   firestore: firestoreReducer,
   firebase: firebaseReducer
 });

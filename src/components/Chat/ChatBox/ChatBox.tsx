@@ -6,19 +6,38 @@ import {
   StyledSearchBox,
   StyledMessageBox
 } from "./StyledChatBox";
+import { connect } from "react-redux";
 
-const ChatBox = ({ rooms, roomId, userId }: any) => {
+const ChatBox: React.SFC<IChatBoxProps> = ({
+  rooms,
+  roomId,
+  userId,
+  showSearchBarStatus
+}) => {
   return (
     <StyledWrapper>
-      <StyledSearchBox>
+      <StyledSearchBox isOpen={showSearchBarStatus}>
         <Search rooms={rooms} />
       </StyledSearchBox>
 
-      <StyledMessageBox>
+      <StyledMessageBox isOpen={showSearchBarStatus}>
         <MessageBox userId={userId} roomId={roomId} />
       </StyledMessageBox>
     </StyledWrapper>
   );
 };
 
-export default ChatBox;
+interface IChatBoxProps {
+  rooms?: object;
+  roomId?: string;
+  userId?: string;
+  showSearchBarStatus?: any;
+}
+
+const mapStateToProps = (state: any) => {
+  return {
+    showSearchBarStatus: state.createShowSearchBox.showSearchBoxStatus
+  };
+};
+
+export default connect(mapStateToProps)(ChatBox);

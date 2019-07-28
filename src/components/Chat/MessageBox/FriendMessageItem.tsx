@@ -19,7 +19,7 @@ const FriendMessageItem: React.SFC<IStyledMessageProps> = () => {
 };
 
 interface IStyledMessageProps {
-  mymessage?: any;
+  mymessage?: boolean;
 }
 
 export default FriendMessageItem;

@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, Dispatch } from "react";
 import {
   StyledWrapper,
   StyledForm,
@@ -20,13 +20,13 @@ class LoginForm extends Component<ILoginState> {
     password: ""
   };
 
-  setCurrentData = (e: any) => {
+  setCurrentData = (e: React.FormEvent<HTMLInputElement>) => {
     this.setState({
       [e.currentTarget.name]: e.currentTarget.value
     } as Pick<ILoginState, keyof ILoginState>);
   };
 
-  signIn = (e: any) => {
+  signIn = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     this.props.signIn(this.state);
   };
@@ -75,9 +75,9 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch<any>) => {
   return {
-    signIn: (creds: any) => dispatch(signIn(creds))
+    signIn: (creds: object) => dispatch(signIn(creds))
   };
 };
 
@@ -85,7 +85,7 @@ interface ILoginState {
   email?: string;
   passwrod?: string;
   signIn?: any;
-  authError?: any;
+  authError?: string;
 }
 
 export default connect(

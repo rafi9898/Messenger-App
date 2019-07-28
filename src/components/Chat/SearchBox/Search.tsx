@@ -14,11 +14,13 @@ import { connect } from "react-redux";
 import AddNewRoomModal from "../../Modals/AddNewRoom/AddNewRoomModal";
 import { signOut } from "../../../store/actions/authActions";
 import LoadSpinnerImage from "../../../assets/load-spinner.svg";
+import { showSearchBox } from "../../../store/actions/modalActions";
 
 const Search: React.SFC<ISearchProps> = ({
   createAddNewRoomModal,
   rooms,
-  signOut
+  signOut,
+  showSearchBox
 }) => {
   const [searchRooms, setSearchRooms] = useState([]);
   const [isSearchRooms, setStatusSearch] = useState(false);
@@ -27,7 +29,11 @@ const Search: React.SFC<ISearchProps> = ({
     rooms &&
     rooms.map((room: any) => {
       return (
-        <StyledRoomLink key={room.id} to={"/room/" + room.id}>
+        <StyledRoomLink
+          onClick={() => showSearchBox(false)}
+          key={room.id}
+          to={"/room/" + room.id}
+        >
           <PersonsList
             name={room.roomName}
             lastMessage={`Stworzył: ${room.createdBy}`}
@@ -93,7 +99,8 @@ const mapDispatchToProps = (dispatch: any) => {
     createAddNewRoomModal: (state: boolean) =>
       dispatch(createAddNewRoomModal(state)),
 
-    signOut: () => dispatch(signOut())
+    signOut: () => dispatch(signOut()),
+    showSearchBox: (state: boolean) => dispatch(showSearchBox(state))
   };
 };
 
@@ -101,6 +108,7 @@ interface ISearchProps {
   createAddNewRoomModal: any;
   rooms?: any;
   signOut?: any;
+  showSearchBox?: any;
 }
 
 export default connect(
