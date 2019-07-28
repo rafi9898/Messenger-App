@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { ImageAdd } from "styled-icons/boxicons-regular/ImageAdd";
 import { InsertEmoticon } from "styled-icons/material/InsertEmoticon";
 import Emoji from "react-emoji-render";
+import { Navicon } from "styled-icons/evil/Navicon";
 
 export const StyledWrapper = styled.div`
   width: 100%;
@@ -22,6 +23,20 @@ export const StyledHeaderMessage = styled.div`
   padding: 20px 0px;
   text-align: center;
   border-bottom: 1px solid #707070;
+`;
+
+export const StyledNavIcon = styled(Navicon)`
+  width: 54px;
+  height: 54px;
+  color: #333;
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  display: none;
+
+  @media (max-width: 1200px) {
+    display: block;
+  }
 `;
 
 export const StyledHeaderTitle = styled.h2`
@@ -127,6 +142,10 @@ export const StyledConfigBtn = styled.button`
     background: #dedede;
     transition: all 0.3s;
   }
+
+  @media (max-width: 1200px) {
+    display: none;
+  }
 `;
 
 export const StyledSendBtn = styled.button`
@@ -146,6 +165,10 @@ export const StyledSendBtn = styled.button`
   &:hover {
     background: #1e4261;
     transition: all 0.3s;
+  }
+
+  @media (max-width: 1200px) {
+    width: 40%;
   }
 `;
 

@@ -3,6 +3,7 @@ import {
   StyledWrapper,
   StyledContainer,
   StyledHeaderMessage,
+  StyledNavIcon,
   StyledHeaderTitle,
   StyledEnterMessageBox,
   StyledEnterMessage,
@@ -17,6 +18,7 @@ import MyMessageItem from "./MyMessageItem";
 import EmoticonsModal from "../../Modals/EmoticonsModal";
 import { connect } from "react-redux";
 import { createModal } from "../../../store/actions/modalActions";
+import { showSearchBox } from "../../../store/actions/modalActions";
 import { firestoreConnect } from "react-redux-firebase";
 import { compose } from "redux";
 import LoadSpinnerImage from "../../../assets/load-spinner.svg";
@@ -36,21 +38,22 @@ class MessageBox extends Component<IStyledMessageProps> {
       room,
       createMessage,
       message,
-      userId
+      userId,
+      showSearchBox
     } = this.props;
 
     const setStatusModal = () => {
       createModal(true);
     };
 
-    const setMessage = (e: any) => {
+    const setMessage = (e: React.FormEvent<HTMLInputElement>) => {
       this.setState({
-        message: e.target.value,
+        message: e.currentTarget.value,
         roomId: roomId
       });
     };
 
-    const addNewMessage = (e: any) => {
+    const addNewMessage = (e: React.FormEvent<EventTarget>) => {
       e.preventDefault();
       if (this.state.message.length > 0) {
         createMessage(this.state);
@@ -60,7 +63,7 @@ class MessageBox extends Component<IStyledMessageProps> {
       }
     };
 
-    const sendMessageWithEnter = (e: any) => {
+    const sendMessageWithEnter = (e: React.KeyboardEvent<HTMLDivElement>) => {
       if (e.key === "Enter") {
         e.preventDefault();
         if (this.state.message.length > 0) {
@@ -77,6 +80,7 @@ class MessageBox extends Component<IStyledMessageProps> {
         <StyledContainer>
           <StyledHeaderMessage>
             <StyledHeaderTitle>{room.roomName}</StyledHeaderTitle>
+            <StyledNavIcon onClick={() => showSearchBox(true)} />
           </StyledHeaderMessage>
 
           <StyledMainContentBox>
@@ -127,20 +131,22 @@ class MessageBox extends Component<IStyledMessageProps> {
 }
 
 interface IStyledMessageProps {
-  mymessage?: any;
+  mymessage?: boolean;
   isOpenModal?: boolean;
   createModal?: any;
-  roomId?: any;
+  roomId?: string;
   room?: any;
   createMessage?: any;
-  message?: any;
-  userId?: any;
+  message?: object;
+  userId?: string;
+  showSearchBox?: any;
 }
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
     createModal: (state: boolean) => dispatch(createModal(state)),
-    createMessage: (state: any) => dispatch(createMessage(state))
+    createMessage: (state: any) => dispatch(createMessage(state)),
+    showSearchBox: (state: boolean) => dispatch(showSearchBox(state))
   };
 };
 

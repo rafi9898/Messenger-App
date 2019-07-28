@@ -17,7 +17,7 @@ import moment from "moment";
 const MyMessageItem: React.SFC<IStyledMessageProps> = ({ message, userId }) => {
   const messageList =
     message && message ? (
-      message.map((item: any, key: any) => {
+      message.map((item: any, key: number) => {
         return (
           <StyledMessageBox key={key}>
             <StyledAvatarBox>
@@ -59,9 +59,9 @@ const MyMessageItem: React.SFC<IStyledMessageProps> = ({ message, userId }) => {
 };
 
 interface IStyledMessageProps {
-  mymessage?: any;
+  mymessage?: boolean;
   message?: any;
-  userId?: any;
+  userId?: string;
 }
 
 export default MyMessageItem;

@@ -9,3 +9,9 @@ export const createAddNewRoomModal = (state: boolean) => {
     dispatch({ type: "CREATE_ADD_NEW_ROOM_MODAL", addRoomModalStatus: state });
   };
 };
+
+export const showSearchBox = (state: boolean) => {
+  return (dispatch: any, getState: any) => {
+    dispatch({ type: "SHOW_SEARCH_BOX", showSearchBoxStatus: state });
+  };
+};
