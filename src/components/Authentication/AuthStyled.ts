@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import BackgroundAuth from "../../assets/background-auth.png";
+import BackgroundAuth from "../../assets/background-auth.jpg";
 
 export const StyledWrapper = styled.div`
   width: 100vw;

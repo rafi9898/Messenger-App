@@ -8,7 +8,7 @@ export const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   max-height: 100%;
-  background: #eff0f4;
+  background: #9fa9d6;
 `;
 
 export const StyledContainer = styled.div`
@@ -55,7 +55,7 @@ export const StyledNameFirend = styled.span`
 
 export const StyledMessageContainer = styled.div`
   height: auto;
-  background: #eff0f4;
+  background: #9fa9d6;
   padding: 20px 70px;
 `;
 
@@ -94,7 +94,7 @@ export const StyledContentBox = styled.div`
   width: auto;
   padding: 10px 15px;
   background: ${(props: IStyledMessageProps) =>
-    props.mymessage ? "#3578E5" : "#fefefe"};
+    props.mymessage ? "#212c59" : "#fefefe"};
   border-radius: 3px;
   box-shadow: 10px 11px 5px -14px rgba(0, 0, 0, 0.75);
 `;

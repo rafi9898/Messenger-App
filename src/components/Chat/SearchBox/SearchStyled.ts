@@ -5,7 +5,7 @@ export const StyledWrapper = styled.div`
   width: 100%;
   height: 100%;
   max-height: 100%;
-  background: #262b33;
+  background: #212c59;
   overflow-y: auto;
   overflow-x: hidden;
 `;
