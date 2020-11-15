@@ -4,13 +4,14 @@ import "firebase/auth";
 import "firebase/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBlmHdIhpByZCuQFvBaR7bTa6AhTPSnXNo",
-  authDomain: "messenger-app-rafi9898.firebaseapp.com",
-  databaseURL: "https://messenger-app-rafi9898.firebaseio.com",
-  projectId: "messenger-app-rafi9898",
-  storageBucket: "messenger-app-rafi9898.appspot.com",
-  messagingSenderId: "330722596515",
-  appId: "1:330722596515:web:c3e4cc79642d135d"
+  apiKey: "AIzaSyActsD9YAJz-hHL6BHUxi8XGBLNpGoEpNE",
+  authDomain: "chatbox-szkola.firebaseapp.com",
+  databaseURL: "https://chatbox-szkola.firebaseio.com",
+  projectId: "chatbox-szkola",
+  storageBucket: "chatbox-szkola.appspot.com",
+  messagingSenderId: "328033284048",
+  appId: "1:328033284048:web:9faa4f353f90b82f6093d5",
+  measurementId: "G-GZ7S2QVRKD"
 };
 
 firebase.initializeApp(firebaseConfig);

@@ -13,19 +13,24 @@
     "allowSyntheticDefaultImports": true,
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    //"module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "preserve",
-
-      "module": "commonjs",
-      "sourceMap": false,
-      "strictNullChecks": true,
-      "types": ["@types/chrome", "@types/node", "@types/firefox-webext-browser"],
-      "typeRoots": ["./node_modules/@types", "./types"],
-      "noImplicitAny": false
+    "module": "esnext",
+    "sourceMap": false,
+    "strictNullChecks": true,
+    "types": [
+      "@types/chrome",
+      "@types/node",
+      "@types/firefox-webext-browser"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+      "./types"
+    ],
+    "noImplicitAny": false
   },
   "include": [
     "src"
