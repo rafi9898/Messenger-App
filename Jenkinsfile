@@ -8,6 +8,11 @@ pipeline {
         }
 
         stage("test") {
+            when {
+                espression {
+                    BRANCH_NAME == 'develop'
+                }
+            }
             steps {
                 echo 'Testing the application...'
             }
@@ -18,5 +23,12 @@ pipeline {
                 echo 'Deploying the application...'
             }
         }
+
+        post {
+            always {
+               echo 'Build has been finished' 
+            }
+        }
+
     }
 }
